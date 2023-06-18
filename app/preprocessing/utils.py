@@ -12,11 +12,8 @@ async def save_file(audio_file):
     return file_path
 
 def normalize_result(results):
-    normalized_results = np.array([])
+    normalized_results = []
     for x in range(tf.shape(results)[0]):
         curr_result = results[x]
-        print(curr_result)
-        print(np.where(curr_result > 0.6, 1, 0))
-        normalized_results = np.concatenate([normalized_results, np.where(curr_result > 0.6, 1, 0)])
-    print(normalized_results)
+        normalized_results.append([int(i) for i in np.where(curr_result > 0.6, 1, 0)])
     return normalized_results
